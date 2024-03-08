@@ -1,0 +1,21 @@
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/admin/index :: dynamic(~{::main})}">
+
+<body>
+	<main ng-app="summary-app" ng-controller="summary-ctrl" class="my-2">
+		<div class="card-header text-center text-danger my-4">
+					<h3 style="font-weight: bold;">TOP 10 SẢN PHẨM BÁN CHẠY</h3>
+				</div>
+		<!-- Fourth Row content -->
+		<div class="forthRowContent row mt-3">
+			<div class="col mt-2">
+				<div class="card border-0 mb-2">
+					<div class="card-body">
+						<canvas id="myBarChartTop10Product"></canvas>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+</body>
+
+</html>

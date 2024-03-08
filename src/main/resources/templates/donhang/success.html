@@ -1,0 +1,50 @@
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/index :: dynamic(~{::main})}">
+
+<body>
+	<main style="margin-top: 150px; margin-bottom: 50px;" class="container">
+		<div class="body py-5">
+			<div class="container">
+				<div class="w-50 m-auto">
+					<form name = 'funny'>
+					<!-- Thêm lớp "my-4" để tạo ra khoảng cách trên và dưới tiêu đề trang -->
+					<h1 class="my-3 text-success text-center">Thanh toán thành công</h1>
+					<!-- Sử dụng lớp "alert" và "alert-danger" để tạo ra thông báo lỗi -->
+					<!--	<h2 class="my-2">Chi tiết đơn hàng</h2>-->
+					<!-- Sử dụng lớp "table" và "table-bordered" để tạo ra bảng hiển thị thông tin chi tiết đơn hàng -->
+					<table class="table table-bordered">
+						<tbody>
+							<tr>
+								<td>Thông tin đơn hàng:</td>
+								<td><span th:text="${orderId}">[order ID]</span></td>
+							</tr>
+							<tr>
+								<td>Tổng tiền:</td>
+								<td><span th:text="${totalPrice}">[total price]</span></td>
+							</tr>
+							<tr>
+								<td>Thời gian thanh toán:</td>
+								<td><span th:text="${paymentTime}">[payment time]</span></td>
+							</tr>
+							<tr>
+								<td>Mã giao dịch:</td>
+								<td><span th:text="${transactionId}">[transaction ID]</span></td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="text-center">
+						<div style="display: none;">
+							<div class="form-control" id="tentaikhoan">[[${#request.remoteUser}]]</div>
+						</div>
+						<h6 style="color: red;">Quý khách đã thanh toán thành công, vui lòng nhấn đồng ý để xác nhận đặt
+							hàng</h6>
+						<a ng-click="order.payment()" class="btn btn-primary">Đồng ý</a>
+					</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</main>
+</body>
+<script>
+	
+</script>

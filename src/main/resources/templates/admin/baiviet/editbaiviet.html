@@ -1,0 +1,34 @@
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/admin/index :: dynamic(~{::main})}">
+<main class="my-2">
+	<div class="card-header text-center text-danger my-4">
+		<h3 style="font-weight: bold;">THÊM VÀ CHỈNH SỬA BÀI VIẾT</h3>
+	</div>
+	<div class="ms-auto"><a th:href="@{/admin/baiviet/list}" type="button" class="btn btn-outline-primary ">Quay Lại
+			Danh Sách Bài Viết</a></div>
+	<form class="row g-3 needs-validation" th:action="@{/admin/baiviet/edit}" th:object="${baiViet}" method="post">
+		<div class="col-12 position-relative">
+			<input type="hidden" th:field="*{id}" class="form-control" id="validationTooltip01" required>
+		</div>
+		<div class="col-12 position-relative">
+			<label for="validationTooltip01" class="form-label">Tiêu Đề</label>
+			<input th:field="*{tieude}" type="text" class="form-control" id="validationTooltip01" required>
+		</div>
+		<div class="col-12">
+			<label for="validationTextarea" class="form-label">Nội Dung Bài Viết</label>
+			<textarea th:field="*{noidung}" rows="4" class="form-control" id="validationTextarea" placeholder=""
+				required></textarea>
+			<div class="invalid-feedback">
+				Please enter a message in the textarea.
+			</div>
+		</div>
+		<div class="col-md-6">
+			<label for="formFile" class="form-label">Hình Ảnh</label>
+			<input th:field="*{hinhanh}" type="file" class="form-control" aria-label="file example" required>
+			<div class="invalid-feedback">Example invalid form file feedback</div>
+		</div>
+		<div class="col-12">
+			<button type="submit" class="btn btn-success">Lưu</button>
+		</div>
+	</form>
+
+</main>

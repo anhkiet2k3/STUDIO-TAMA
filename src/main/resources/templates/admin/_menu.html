@@ -1,0 +1,138 @@
+<div style=" background-color: aliceblue; min-height: 735px;" xmlns:th="http://www.thymeleaf.org">
+	<div>
+		<div class="row mt-3">
+			<div class="col-6 mt-1">
+				<p class="nav-link" href="#"> Xin chào: <b>[[${#request.remoteUser}]]</b></p>
+			</div>
+			<th:block th:if="${#request.remoteUser}"></th:block>
+			<div class="col-6" style="text-align: right;">
+				<a class="btn btn-outline-success" th:href="@{/taikhoan/logoff}"> Đăng xuất</a>
+			</div>
+		</div>
+	</div>
+	<div class="navbar-nav me-auto m-auto text-center my-2 ">
+		<a th:href="@{/admin}"><img id="logo" th:src="@{|/assets/images/logo_tama.png|}" style="height: 120px;" alt></a>
+	</div>
+
+	<div class="accordion accordion-flush" id="accordionFlushExample">
+		<div class="accordion-item">
+			<h2 class="accordion-header">
+				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+					data-bs-target="#flush-collapse1" aria-expanded="false" aria-controls="flush-collapse1">
+					<i class="bi bi-list-columns-reverse"></i> &nbsp; Thống kê
+				</button>
+			</h2>
+			<div id="flush-collapse1" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+				<div class="accordion-body mx-3">
+					<a th:href="@{/admin}" style="text-decoration: none;">Sản phẩm bán chạy</a>
+					<hr>
+					<a th:href="@{/admin/nguoimuanhieunhat}" style="text-decoration: none;">Người mua nhiều nhất</a>
+				</div>
+			</div>
+		</div>
+		<div class="accordion-item">
+			<h2 class="accordion-header">
+				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+					data-bs-target="#flush-collapse2" aria-expanded="false" aria-controls="flush-collapse2">
+					<i class="bi bi-basket2"></i> &nbsp;Đơn Hàng
+				</button>
+			</h2>
+			<div id="flush-collapse2" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+				<div class="accordion-body mx-3">
+					<a th:href="@{/admin/donhang/list}" style="text-decoration: none;">Danh sách đơn hàng</a>
+					<hr>
+					<a th:href="@{/admin/donhang/datlich}" style="text-decoration: none;">Danh sách đặt lịch</a>
+				</div>
+			</div>
+		</div>
+		<div class="accordion-item">
+			<h2 class="accordion-header">
+				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+					data-bs-target="#flush-collapse3" aria-expanded="false" aria-controls="flush-collapse3">
+					<i class="bi bi-house"></i> &nbsp;Lễ Phục
+				</button>
+			</h2>
+			<div id="flush-collapse3" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+				<div class="accordion-body mx-3">
+					<a th:href="@{/admin/lephuc/list}" style="text-decoration: none;">Danh sách lễ phục</a>
+					<hr>
+					<a th:href="@{/admin/lephuc/edit}" style="text-decoration: none;">Thêm lễ phục</a>
+					<hr>
+					<a th:href="@{/admin/lephuc/loai}" style="text-decoration: none;">Quản Lí Loại Hàng</a>
+				</div>
+			</div>
+		</div>
+		<div class="accordion-item">
+			<h2 class="accordion-header">
+				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+					data-bs-target="#flush-collapse4" aria-expanded="false" aria-controls="flush-collapse4">
+					<i class="bi bi-person-square"></i> &nbsp;Dịch Vụ
+				</button>
+			</h2>
+			<div id="flush-collapse4" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+				<div class="accordion-body mx-3">
+					<a th:href="@{/admin/dichvu/list}" style="text-decoration: none;">Danh sách dịch vụ</a>
+					<hr>
+					<a th:href="@{/admin/dichvu/add}" style="text-decoration: none;">Thêm dịch vụ</a>
+				</div>
+			</div>
+		</div>
+		<div class="accordion-item">
+			<h2 class="accordion-header">
+				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+					data-bs-target="#flush-collapse5" aria-expanded="false" aria-controls="flush-collapse5">
+					<i class="bi bi-clipboard-data"></i> &nbsp;Bài Viết
+				</button>
+			</h2>
+			<div id="flush-collapse5" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+				<div class="accordion-body mx-3">
+					<a th:href="@{/admin/baiviet/list}" style="text-decoration: none;">Danh sách bài viết</a>
+					<hr>
+					<a th:href="@{/admin/baiviet/add}" style="text-decoration: none;">Thêm bài viết</a>
+				</div>
+			</div>
+		</div>
+		<div class="accordion-item">
+			<h2 class="accordion-header">
+				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+					data-bs-target="#flush-collapse6" aria-expanded="false" aria-controls="flush-collapse6">
+					<i class="bi bi-person-circle"></i> &nbsp;Tài Khoản
+				</button>
+			</h2>
+			<div id="flush-collapse6" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+				<div class="accordion-body mx-3">
+					<a th:href="@{/admin/taikhoan/list}" style="text-decoration: none;">Danh sách tài khoản</a>
+					<hr>
+					<a th:href="@{/admin/taikhoan/edit}" style="text-decoration: none;">Thêm tài khoản</a>
+				</div>
+			</div>
+		</div>
+		<div class="accordion-item">
+			<h2 class="accordion-header">
+				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+					data-bs-target="#flush-collapse7" aria-expanded="false" aria-controls="flush-collapse6">
+					<i class="bi bi-chat-dots-fill"></i> &nbsp;Bình Luận
+				</button>
+			</h2>
+			<div id="flush-collapse7" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+				<div class="accordion-body mx-3">
+					<a th:href="@{/admin/binhluan/lephuc}" style="text-decoration: none;">Bình luận lễ phục</a>
+					<hr>
+					<a th:href="@{/admin/binhluan/baiviet}" style="text-decoration: none;">Bình luận bài viết</a>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+</div>
+
+<style>
+	.accordion-button {
+		background-color: aliceblue;
+	}
+
+	.accordion-collapse {
+		background-color: aliceblue;
+	}
+</style>

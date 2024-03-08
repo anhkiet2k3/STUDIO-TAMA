@@ -1,0 +1,174 @@
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/admin/index :: dynamic(~{::main})}">
+
+<body>
+	<main class="my-2">
+		<div class="card-header text-center text-danger my-4">
+			<h3 style="font-weight: bold;">ĐƠN HÀNG</h3>
+		</div>
+		<!--Thống kê-->
+		<div>
+			<div class="row row-cols-1 row-cols-md-4 g-4">
+				<div class="col">
+					<div class=" border rounded-3 py-2">
+						<div class="row px-3">
+							<span class=" col-3 border rounded-3  bg-primary">
+								<div style="padding-top: 14px; text-align: center; color:white;"><i
+										style="font-size: 38px;"><i class="bi bi-bag-fill"></i></i></div>
+							</span>
+							<div class="col-9" style="font-size: 15px;">
+								<span style="font-weight: bold; color: blue;">Chờ xác nhận</span>
+								<p class="text-sm mb-0">Số lượng: <span class="text-danger">[[${slcxn}]]</span></p>
+								<p class="text-sm mb-0">Tổng: <span
+										class="text-danger">[[${#numbers.formatDecimal(ttcxn, 0, 'COMMA', 0, 'POINT')}]]
+										Đ</span></p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col">
+					<div class=" border rounded-3 py-2">
+						<div class="row px-3">
+							<span class=" col-3 border rounded-3  bg-warning">
+								<div style="padding-top: 14px; text-align: center; color:white;"><i
+										style="font-size: 38px;"><i class="bi bi-bag-dash-fill"></i></i></div>
+							</span>
+							<div class="col-9" style="font-size: 15px;">
+								<span style="font-weight: bold; color: blue;">Đang giao</span>
+								<p class="text-sm mb-0">Số lượng: <span class="text-danger">[[${sldg}]]</span></p>
+								<p class="text-sm mb-0">Tổng: <span class="text-danger">[[${#numbers.formatDecimal(ttdg,
+										0, 'COMMA', 0, 'POINT')}]] Đ</span></p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col">
+					<div class=" border rounded-3 py-2">
+						<div class="row px-3">
+							<span class=" col-3 border rounded-3  bg-success">
+								<div style="padding-top: 14px; text-align: center; color:white;"><i
+										style="font-size:38px;"><i class="bi bi-bag-check-fill"></i></i></div>
+							</span>
+							<div class="col-9" style="font-size: 15px;">
+								<span style="font-weight: bold; color: blue;">Đã giao</span>
+								<p class="mb-0">Số lượng: <span class="text-danger">[[${sldag}]]</span></p>
+								<p class="mb-0">Tổng: <span class="text-danger">[[${#numbers.formatDecimal(ttdag, 0,
+										'COMMA', 0, 'POINT')}]] Đ</span></p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col">
+					<div class=" border rounded-3 py-2">
+						<div class="row px-3">
+							<span class=" col-3  border rounded-3  bg-danger">
+								<div style="padding-top: 14px; text-align: center; color:white;"><i
+										style="font-size: 38px;"><i class="bi bi-bag-x-fill"></i></i></div>
+							</span>
+							<div class="col-9" style="font-size: 15px;">
+								<span style="font-weight: bold; color: blue;">Đã hủy</span>
+								<p class="text-sm mb-0">Số lượng: <span class="text-danger">[[${sldh}]]</span></p>
+								<p class="text-sm mb-0">Tổng: <span class="text-danger">[[${#numbers.formatDecimal(ttdh,
+										0, 'COMMA', 0, 'POINT')}]] Đ</span></p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--Lọc-->
+		<hr>
+
+		<div class="">
+			<div class="row">
+				<div class="col-7 ">
+					<h5 style="color: blue; font-weight: bold;"> <i class="bi bi-funnel-fill"></i> LỌC THEO TRẠNG THÁI
+					</h5>
+					<div class="mx-3 mt-3">
+						<a th:href="@{/admin/donhang/list}"
+							style="text-decoration: none; --bs-link-hover-color-rgb: 255, 0, 0;">Tất cả</a> |
+						<a th:href="@{/admin/donhang/list?trangthai=1}"
+							style="text-decoration: none; --bs-link-hover-color-rgb: 255, 0, 0;  ">Chờ xác nhận</a> |
+						<a th:href="@{/admin/donhang/list?trangthai=2}"
+							style="text-decoration: none; --bs-link-hover-color-rgb: 255, 0, 0;">Đang chuẩn bị</a> |
+						<a th:href="@{/admin/donhang/list?trangthai=3}"
+							style="text-decoration: none; --bs-link-hover-color-rgb: 255, 0, 0;">Đang giao</a> |
+						<a th:href="@{/admin/donhang/list?trangthai=4}"
+							style="text-decoration: none; --bs-link-hover-color-rgb: 255, 0, 0;">Đã giao</a> |
+						<a th:href="@{/admin/donhang/list?trangthai=5}"
+							style="text-decoration: none; --bs-link-hover-color-rgb: 255, 0, 0;">Đã hủy</a>
+					</div>
+				</div>
+				<div class="col-5">
+					<h5 style="color: blue; font-weight: bold;"> <i class="bi bi-search"></i> TÌM THEO MÃ</h5>
+					<form th:action="@{/admin/donhang/timkiem}" method="post" class="row g-3">
+						<div class="col-9">
+							<input name="txtkiem" class="form-control" placeholder="Nhập mã . . .">
+						</div>
+						<div class="col-3">
+							<button type="submit" class="btn btn-primary" style="width: 100px;"><i
+									class="bi bi-search"></i> Tìm</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<h3 th:if="${message}" class="text-center border rounded-3"
+			style=" color: red; font-weight: bold; padding: 10px;">
+			<b>[[${message}]]</b>
+		</h3>
+		<!--Bảng-->
+		<h5 style="font-weight: bold; color: rgb(0, 0, 255)"> <i class="bi bi-card-list"></i> ĐƠN HÀNG</h5>
+		<div class="my-3">
+			<div class="text-primary">
+				<table class="table table-hover">
+					<thead>
+						<tr class="text-center">
+							<th style="width: 5%;">STT</th>
+							<th style="width: 10%;">Mã</th>
+							<th style="width: 15%;">Ngày tạo</th>
+							<th style="width: 20%;">Địa chỉ</th>
+							<th style="width: 15%;">Tổng tiền</th>
+							<th style="width: 15%;">Trạng thái</th>
+							<th class="text-center">Tùy chọn</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="order, state: ${page}" class="text-center">
+							<td>[[${state.index+1}]]</td>
+							<td>[[${order.id}]]</td>
+							<td>[[${order.ngaytao}]]</td>
+							<td th:if="${order.cachnhan}"> Tại Studio </td>
+							<td th:unless="${order.cachnhan}" th:text="${order.diachi}"></td>
+							<td>[[${#numbers.formatDecimal(order.tongtien, 0, 'COMMA', 0, 'POINT')}]] Đ</td>
+							<td>
+								<div th:switch="${order.trangthai}" style="color:red; font-weight: bold ; ">
+									<p th:case="'1'">Chờ xác nhận</p>
+									<p th:case="'2'">Đang chuẩn bị</p>
+									<p th:case="'3'">Đang giao</p>
+									<p th:case="'4'">Đã giao</p>
+									<p th:case="'5'">Đã hủy</p>
+								</div>
+							<td>
+								<a th:href="@{|/admin/donhang/detail/${order.id}|}" type="button"
+									class="btn btn-warning">Chi tiết</a>
+								<a th:href="@{|/admin/donhang/delete/${order.id}|}" class=" btn btn-danger"><i
+										class="bi bi-trash3-fill"></i> Xóa </a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="text-center mb-3">
+			<a th:href="@{|/admin/donhang/list/?p=0|}" class="btn btn-primary"><i
+					class="bi bi-chevron-bar-left"></i></a>
+			<a th:href="@{|/admin/donhang/list/?p=${page.number-1}|}" class="btn btn-primary"><i
+					class="bi bi-chevron-double-left"></i></a>
+			<a th:href="@{|/admin/donhang/list/?p=${page.number+1}|}" class="btn btn-primary"><i
+					class="bi bi-chevron-double-right"></i></a>
+			<a th:href="@{|/admin/donhang/list/?p=${page.totalPages-1}|}" class="btn btn-primary"><i
+					class="bi bi-chevron-bar-right"></i></a>
+		</div>
+	</main>
+</body>

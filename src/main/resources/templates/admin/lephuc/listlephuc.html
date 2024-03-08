@@ -1,0 +1,140 @@
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/admin/index :: dynamic(~{::main})}">
+
+
+<body>
+	<main ng-app="product-app" ng-controller="product-ctrl" class="my-2">
+		<div class="card-header text-center text-danger my-4">
+			<h3 style="font-weight: bold;">DANH SÁCH LỄ PHỤC</h3>
+		</div>
+		<div class="card mb-3">
+			<div class="card-body text-success">
+				<table class="table table-condensed">
+					<thead class="bg-success">
+						<tr class=" text-center">
+							<th>Mã</th>
+							<th>Ảnh</th>
+							<th style="width: 10%;" >Tên</th>
+							<th>Mô tả</th>
+							<th>Nội dung</th>
+							<th>GIá</th>
+							<th style="width: 10%;">Loại</th>
+							<th>Tùy chọn</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="item in pager.items">
+							<td>{{item.id}}</td>
+							<td><img src="/assets/images/{{item.hinh}}"
+									style="width: 80px; height: 100px; object-fit: cover;" class="card-img-top1"></td>
+							<td>{{item.ten}}</td>
+							<td><div class="an">{{item.mota}}</div></td>
+							<td><div class="an">{{item.noidung}}</div></td>
+							<td>{{item.gia|number}}</td>
+							<td>{{item.loai.ten}}</td>
+							<td>
+								<div class="btn-group btn-group-xs">
+									<a ng-click="edit(item)" href="" data-bs-toggle="modal"
+										data-bs-target="#exampleModal" class="btn btn-warning"> <i
+											class="bi bi-pencil-square"></i>
+									</a>
+									<!-- Modal -->
+									<div class="modal fade" id="exampleModal" tabindex="-1"
+										aria-labelledby="exampleModalLabel" aria-hidden="true">
+										<div class="modal-dialog modal-xl">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h1 class="modal-title fs-5" id="exampleModalLabel">Sửa thông tin
+														lễ phục</h1>
+													<button type="button" class="btn-close" data-bs-dismiss="modal"
+														aria-label="Close"></button>
+												</div>
+												<div class="modal-body">
+													<div class="row">
+														<div class="col-sm-4 text-center ">
+															<label for="image"> <img class="object-fit-cover border rounded"
+																	ng-src="{{'/assets/images/'+form.hinh}}"
+																	style="max-width: 100%;">
+															</label>
+														</div>
+														<div class="col-sm-8">
+															<div class="row">
+																<div class="form-group col-sm-6">
+																	<div class="my-2" >Tên</div>
+																	<input ng-model="form.ten" class="form-control">
+																</div>
+																<div class="form-group col-sm-6">
+																	<div class="my-2">Ảnh</div>
+																	<input type="file" class="form-control" id="image"
+																		onchange="angular.element(this).scope().imageChanged(this.files)">
+																</div>
+															</div>
+															<div class="row">
+																<div class="form-group col-sm-6">
+																	<div class="my-2">Loại</div>
+																	<select ng-model="form.loai.id"
+																		class="form-control">
+																		<option ng-repeat="c in categories"
+																			ng-value="c.id">{{c.ten}}</option>
+																	</select>
+																</div>
+																<div class="form-group col-sm-6">
+																	<div class="my-2">Giá</div>
+																	<input ng-model="form.gia" class="form-control">
+																</div>
+															</div>
+															<div class="row">
+																<div class="form-group col-sm-12">
+																	<div class="my-2">Mô tả</div>
+																	<textarea rows="4" cols="50" ng-model="form.mota"
+																		class="form-control"></textarea>
+																</div>
+																<div class="form-group col-sm-12">
+																	<div class="my-2">Nội dung</div>
+																	<textarea rows="8" cols="50"
+																		ng-model="form.noidung"
+																		class="form-control"></textarea>
+																</div>
+															</div>
+
+														</div>
+													</div>
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-primary"
+														data-bs-dismiss="modal" ng-click="update()">Lưu</button>
+												</div>
+											</div>
+										</div>
+									</div>
+
+
+									<a ng-click="delete(item)" href="" class="btn btn-danger">
+										<i class="bi bi-trash3"></i>
+									</a>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="card-footer bg-transparent">
+				<div class="panel-footer text-center">
+					<button ng-click="pager.first()" class="btn btn-danger">
+						<i class="bi bi-caret-left-square"></i>
+					</button>
+					<button ng-click="pager.prev()" class="btn btn-primary">
+						<i class="bi bi-caret-left-fill"></i>
+					</button>
+					<button class="btn btn-success">{{pager.page + 1}} of
+						{{pager.count}}</button>
+					<button ng-click="pager.next()" class="btn btn-primary">
+						<i class="bi bi-caret-right-fill"></i>
+					</button>
+					<button ng-click="pager.last()" class="btn btn-danger">
+						<i class="bi bi-caret-right-square"></i>
+					</button>
+				</div>
+			</div>
+		</div>
+	</main>
+</body>

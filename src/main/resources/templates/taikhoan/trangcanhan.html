@@ -1,0 +1,28 @@
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/index :: dynamic(~{::main})}">
+<main style="margin-top: 150px; margin-bottom: 50px;" class="container">
+	<div class="card-header text-center text-danger my-4">
+		<h3 style="font-weight: bold;">TRANG CÁ NHÂN</h3>
+	</div>
+	<div class="card-profile" th:object="${user}">
+		<div th:if="${session.messsage}" class="container">
+			<div class="alert alert-success my-2 text-center" role="alert">
+				<span th:text="${session.messsage}"></span>
+			</div>
+		</div>
+		<img class="object-fit-cover rounded-circle mt-3" th:src="@{|/assets/images/*{hinhanh}|}" width="50%"
+			height="200px">
+		<hr>
+		<h1 th:text="*{ten}"></h1>
+		<p>Email: <b>[[*{email}]]</b></p>
+		<p>Số điện thoại: <b>[[*{sdt}]]</b></p>
+		<p>Địa chỉ: <b>[[*{diachi}]]</b></p>
+		<p>
+			<button class="btn_profile">
+				<a class="dropdown-item" th:href="@{/taikhoan/chinhsuathongtin}">
+					Chỉnh sửa thông tin</a>
+			</button>
+		</p>
+	</div>
+</main>
+
+</html>

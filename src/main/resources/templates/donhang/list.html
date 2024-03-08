@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/index :: dynamic(~{::main})}">
+
+<body>
+	<main style="margin-top: 150px; margin-bottom: 50px;" class="container">
+		<div>
+			<div class="card-header text-center text-danger my-4">
+				<h3 style="font-weight: bold;">ĐƠN HÀNG</h3>
+			</div>
+			<div class="row row-cols-1 row-cols-md-6 g-6 text-center">
+				<div class="col">
+					<a class="card card-body" th:href="@{/donhang/list}" id="btn_loc">Tất cả</a>
+				</div>
+				<div class="col">
+					<a class="card card-body" th:href="@{/donhang/list?trangthai=1}" id="btn_loc">Chờ xác nhận</a>
+				</div>
+				<div class="col">
+					<a class="card card-body" th:href="@{/donhang/list?trangthai=2}" id="btn_loc">Đang chuẩn bị</a>
+				</div>
+				<div class="col">
+					<a class="card card-body" th:href="@{/donhang/list?trangthai=3}" id="btn_loc">Đang giao</a>
+				</div>
+				<div class="col">
+					<a class="card card-body" th:href="@{/donhang/list?trangthai=4}" id="btn_loc">Đã giao</a>
+				</div>
+				<div class="col">
+					<a class="card card-body" th:href="@{/donhang/list?trangthai=5}" id="btn_loc">Đã hủy</a>
+				</div>
+			</div>
+		</div>
+		<div class="my-3">
+			<div class="card-body text-primary">
+				<table class="table table-hover">
+					<thead>
+						<tr class="text-center">
+							<th style="width: 5%;">STT</th>
+							<th style="width: 5%;">Mã</th>
+							<th style="width: 20%;">Ngày tạo</th>
+							<th style="width: 20%;">Địa chỉ</th>
+							<th style="width: 10%;">Tổng tiền</th>
+							<th style="width: 10%;">Trạng thái</th>
+							<th style="width: 10%;" class="text-center">Tùy chọn</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="order, state: ${donhang}" class="text-center">
+							<td>[[${state.index}]]</td>
+							<td>[[${order.id}]]</td>
+							<td>[[${order.ngaytao}]]</td>
+							<td th:if="${order.cachnhan}"> Tại Studio </td>
+							<td th:unless="${order.cachnhan}" th:text="${order.diachi}"></td>
+							<td>[[${#numbers.formatDecimal(order.tongtien, 0, 'COMMA', 0, 'POINT')}]] Đ</td>
+							<td>
+								<div th:switch="${order.trangthai}" style="color:red; font-weight: bold ; ">
+									<p th:case="'0'">Giỏ hàng</p>
+									<p th:case="'1'">Chờ xác nhận</p>
+									<p th:case="'2'">Đang chuẩn bị</p>
+									<p th:case="'3'">Đang giao</p>
+									<p th:case="'4'">Đã giao</p>
+									<p th:case="'5'">Đã hủy</p>
+								</div>
+							<td>
+								<a th:href="@{|/donhang/detail/${order.id}|}" type="button"
+									class="btn btn-outline-warning">Xem chi tiết</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="card-header text-center text-danger my-4">
+			<h3 style="font-weight: bold;">LỊCH ĐẶT</h3>
+		</div>
+		<div class="my-3">
+			<div class="card-body text-primary">
+				<table class="table table-hover">
+					<thead>
+						<tr class="text-center">
+							<th>Tên Khách Hành</th>
+							<th>Số Điện Thoại</th>
+							<th>Tên Dịch Vụ</th>
+							<th>Giá</th>
+							<th>Ngày thuê</th>
+							<th>Thời gian</th>
+							<th>Địa chỉ</th>
+							<th>Ghi Chú</th>
+							<th>Nơi Làm</th>
+							<th>Trạng thái</th>
+							<th style="width: 10%;" class="text-center">Tùy chọn</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="d:${datlich}" th:object="${d}" class="text-center">
+							<td>[[*{taikhoan.ten}]]</td>
+							<td>[[*{taikhoan.sdt}]]</td>
+							<td>[[*{dichvu.ten}]]</td>
+							<td>[[*{#numbers.formatDecimal(dichvu.gia, 0, 'COMMA', 0, 'POINT')}]]Đ</td>
+							<td th:text="${#dates.format(d.ngaythue, 'dd/MM/yyyy')}"></td>
+							<td th:text="${#dates.format(d.thoigian, 'HH:mm')}"></td>
+							<td>[[*{diachi}]]</td>
+							<td>[[*{ghichu}]]</td>
+							<td th:text="${d.cachnhan ? 'Tại nhà' : 'Tại Studio'}"></td>
+							<td>
+								<div th:switch="${d.trangthai}" style="color:rgb(255, 0, 0); font-weight: bold ; ">
+									<p th:case="'1'">Chờ xác nhận</p>
+									<p th:case="'2'">Đã xác nhận</p>
+									<p th:case="'3'">Đã hủy</p>
+									<p th:case="'4'">Đã Hoàn Thành</p>
+								</div>
+							</td>
+							<td th:if="${d.trangthai != 2 and d.trangthai != 3 and d.trangthai != 4}">
+								<a th:href="@{|/datlich/huy/*{id}|}" type="button"
+									class="btn btn-outline-danger">Hủy</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</main>
+</body>
+
+</html>
+
+<style>
+	#btn_loc {
+		text-decoration: none;
+		font-weight: bold;
+		background-color: aliceblue;
+	}
+
+	#btn_loc:hover {
+		display: block;
+		box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
+		color: red;
+	}
+</style>

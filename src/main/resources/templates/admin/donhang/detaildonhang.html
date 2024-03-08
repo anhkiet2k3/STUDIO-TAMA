@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/admin/index :: dynamic(~{::main})}">
+
+<body>
+	<main th:object="${donhang}" class="my-2">
+		<form th:action="@{/admin/donhang/update}" th:object="${donhang}" method="post">
+			<div>
+				<div class="form-floating my-5" style="display: none;">
+					<input th:field="*{id}" type="text" class="form-control">
+				</div>
+				<div class="form-floating mb-3" style="display: none;">
+					<input th:field="*{taikhoan.tentaikhoan}" type="text" class="form-control">
+				</div>
+				<div class="form-floating mb-3" style="display: none;">
+					<input th:field="*{ngaytao}" type="text" class="form-control">
+				</div>
+				<div class="form-floating mb-3" style="display: none;">
+					<input th:field="*{tongtien}" type="text" class="form-control">
+				</div>
+				<div class="form-floating mb-3" style="display: none;">
+					<input th:field="*{cachnhan}" type="text" class="form-control">
+				</div>
+				<div class="form-floating mb-3" style="display: none;">
+					<input th:field="*{hinhthuc}" type="text" class="form-control">
+				</div>
+				<div class="form-floating mb-3" style="display: none;">
+					<input th:field="*{diachi}" type="text" class="form-control">
+				</div>
+			</div>
+			<div class="my-3">
+				<div class="card-header text-center text-danger my-4">
+					<h3 style="font-weight: bold;">CHI TIẾT ĐƠN HÀNG</h3>
+				</div>
+				<div class="my-3">
+					<a type="button" class="btn btn-primary" th:href="@{/admin/donhang/list}"><i
+							class="bi bi-caret-left"></i> Quay lại đơn hàng</a>
+					<button class="btn btn-success" style="width: 10%;"><i class="bi bi-save2"></i> Lưu</button>
+					<a th:href="@{|/admin/donhang/delete/*{id}|}" class=" btn btn-danger" style="width: 10%;"><i
+							class="bi bi-trash"></i> Xóa</a>
+				</div>
+				<div class="row">
+					<div class="col-8">
+						<table class="table table-hover text-center border border-1 rounded-3">
+							<thead>
+								<tr>
+									<th>Mã</th>
+									<th>Tên</th>
+									<th>Giá</th>
+									<th>Số lượng</th>
+									<th>Thành tiền</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="detail: *{chitietdonhangs}" th:object="${detail}">
+									<td>[[*{lephuc.id}]]</td>
+									<td>[[*{lephuc.ten}]]</td>
+									<td>[[*{#numbers.formatDecimal(gia, 0, 'COMMA', 0, 'POINT')}]] Đ</td>
+									<td>[[*{soluong}]]</td>
+									<td>[[*{#numbers.formatDecimal(gia*soluong, 0, 'COMMA', 0, 'POINT')}]] Đ</td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="text-center mb-3" th:each="order, state: ${donhang}">
+							<p class="col-4 m-auto" th:unless="*{cachnhan}">Phí vận chuyển: 50.000 Đ</p>
+							<b>Tổng tiền: [[${#numbers.formatDecimal(order.tongtien, 0, 'COMMA', 0, 'POINT')}]]
+								ĐỒNG</b>
+						</div>
+					</div>
+					<div class="col-4 border border-1 rounded-3">
+						<p class="mt-1">Mã đơn hàng: <b th:text="*{id}"></b></p>
+						<p>Tên khách hàng: <b th:text="*{taikhoan.ten}"></b></p>
+						<p>Số điện thoại: <b th:text="*{taikhoan.sdt}"></b></p>
+						<p>Email: <b th:text="*{taikhoan.email}"></b></p>
+						<p>Ngày đặt: <b th:text="*{ngaytao}"></b> </p>
+						<p>Địa chỉ:
+							<b th:if="*{cachnhan}">Tại Studio</b>
+							<b class="col-8" style="text-align: right;" th:unless="*{cachnhan}" th:text="*{diachi}"></b>
+						</p>
+						<p>Hình thức thanh toán:
+							<b th:if="*{hinhthuc}">Tiền mặt</b>
+							<b th:unless="*{hinhthuc}">Ví VNPay</b>
+						</p>
+						<p>Trạng thái:
+							<select th:field="*{trangthai}" class="form-select" aria-label="Default select example">
+								<option th:each="c:${trangthais}" th:value="${c.key}">[(${c.value})]</option>
+							</select>
+						</p>
+					</div>
+				</div>
+			</div>
+		</form>
+	</main>
+</body>
+
+</html>

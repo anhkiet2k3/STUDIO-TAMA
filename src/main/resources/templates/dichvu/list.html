@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/index :: dynamic(~{::main})}">
+
+<body>
+	<main style="margin-top: 150px; margin-bottom: 50px;" class="container">
+		<div class="card-header text-center text-danger my-4">
+			<h3 style="font-weight: bold;">DỊCH VỤ</h3>
+		</div>
+		<div class="album">
+			<div class="container">
+				<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+					<div class="col" th:each="d:${items}" th:object="${d}">
+						<div class="card shadow-sm">
+							<img class="bd-placeholder-img card-img-topdv" width="100%" height="225"
+								xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail"
+								preserveAspectRatio="xMidYMid slice" focusable="false"
+								th:src="@{|/assets/images/*{hinhanh1}|}" alt="">
+							<div class="card-bodydv text-center ">
+								<a th:href="@{|/dichvu/ctdichvu/*{id}|}"
+									class="icon-link gap-1 icon-link-hover stretched-link text-decoration-none text-dark">
+									<h3 class="card-textdv ">[[*{ten}]]</h3>
+								</a>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</main>
+</body>
+
+</html>

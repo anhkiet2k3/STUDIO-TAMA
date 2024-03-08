@@ -1,0 +1,79 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{/admin/index :: dynamic(~{::main})}">
+
+<main ng-app="account-app" ng-controller="account-ctrl" class="my-2">
+	<div class="card-header text-center text-danger my-4">
+		<h3 style="font-weight: bold;">THÊM TÀI KHOẢN</h3>
+	</div>
+	<div class="card">
+		<div class="card-body">
+			<div class="row">
+				<div class="col-sm-4 text-center mt-3">
+						<label for="image"> <img ng-src="{{'/assets/images/'+form.hinhanh}}"
+								style="width: 100%; height: 250px; object-fit: cover;">
+						</label>
+					</div>
+				<div class="col-sm-8">
+					<div class="row">
+						<div class="form-group col-sm-6">
+							<label>Tài Khoản</label> <input ng-model="form.tentaikhoan"
+								class="form-control" />
+						</div>
+						<div class="form-group col-sm-6">
+							<label>Mật Khẩu</label> <input ng-model="form.matkhau"
+								class="form-control" type="password" />
+						</div>
+						<div class="form-group col-sm-6">
+							<label>Họ Tên</label> <input ng-model="form.ten"
+								class="form-control" />
+						</div>
+						<div class="form-group col-sm-6">
+							<label>Email</label> <input ng-model="form.email"
+								class="form-control" type="email" />
+						</div>
+						<div class="form-group col-sm-6">
+							<label>Địa Chỉ</label> <input ng-model="form.diachi"
+								class="form-control" />
+						</div>
+						<div class="form-group col-sm-6">
+							<label>Số Điện Thoai</label> <input ng-model="form.sdt"
+								class="form-control" />
+						</div>
+					</div>
+					<div class="row">
+					<div class="form-group col-sm-6">
+    					<label>Photo</label>
+    					<input type="file" class="form-control" id="image" 
+    					onchange="angular.element(this).scope().imageChanged(this.files)">
+    				</div>
+						<div class="form-group col-sm-6">
+							
+							<label>Chức Năng</label>
+							<div class="form-control">
+								<div class="form-check ps-0">
+									<label ng-repeat="r in roles" class="form-check-label me-2"
+										for="inlineFormCheck"> <input ng-model="selectedRole"
+										ng-value="r" class="form-check-input1" type="checkbox"
+										id="inlineFormCheck" ng-checked="selection.indexOf(r)>-1"
+										ng-click="toggleRole(r)"> {{r.ten}}
+									</label>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="mt-2">
+		<div class="panel-footer text-center">
+			<button ng-click="create()" class="btn btn-primary">
+				<b class="fa-solid fa-square-plus"></b> Create
+			</button>
+			<button ng-click="reset()" class="btn btn-info">
+				<b class="fa-solid fa-rotate"></b> Reset
+			</button>
+		</div>
+	</div>
+</main>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/index :: dynamic(~{::main})}">
+
+<body>
+	<main style="margin-top: 150px; margin-bottom: 50px;" class="container">
+		<div class="card-header text-center text-danger my-4">
+			<h3 style="font-weight: bold;">LỄ PHỤC</h3>
+		</div>
+		<div class="row col-12 m-auto my-2 ">
+			<div class="col-3">
+				<div class=" border rounded-4 p-4 ">
+					<h5 style="font-weight: bold;"> <i class="bi bi-search"></i> TÌM THEO TÊN</h5>
+					<form th:action="@{/list/timkiem}" method="post" class="row g-3">
+						<div class="col-auto">
+							<input name="txtkiem" class="form-control" placeholder="" style="width: 180px;float: left;">
+							<button type="submit" class="btn btn-primary mx-2">Tìm</button>
+						</div>
+					</form>
+				</div>
+				<br>
+				<div class=" border rounded-4 p-4 ">
+					<section class="section section-sublink">
+						<div class="section-header text-center">
+							<h5 class="section-title">Loại</h5>
+						</div>
+						<hr>
+						<ul class="list-links price clearfix">
+							<li><a th:href="@{|/lephuc/list?cid=0|}">Tất cả</a></li>
+							<li th:each="c : ${l}"><a th:href="@{|/lephuc/list?cid=${c.id}|}">[[${c.ten}]]</a></li>
+						</ul>
+					</section>
+				</div>
+				<br>
+				<div class=" border rounded-4 p-4 ">
+					<section class="section section-sublink">
+						<div class="section-header text-center">
+							<h5 class="section-title">Giá tiền</h5>
+						</div>
+						<hr>
+						<ul class="list-links price clearfix">
+							<li><a href="/lephuc/gia?max=1000000">Dưới 1 triệu</a></li>
+							<li><a href="/lephuc/gia?min=1000000&max=2000000">Từ 1 -
+									2 triệu</a></li>
+							<li><a href="/lephuc/gia?min=2000000&max=3000000">Từ 2 -
+									3 triệu</a></li>
+							<li><a href="/lephuc/gia?min=3000000&max=5000000">Từ 3 -
+									5 triệu</a></li>
+							<li><a href="/lephuc/gia?min=5000000&max=7000000">Từ 5 -
+									7 triệu</a></li>
+							<li><a href="/lephuc/gia?min=7000000">Trên 7 triệu</a></li>
+						</ul>
+					</section>
+				</div>
+			</div>
+
+			<div class="col-9 border rounded-4 p-4 " style="height: auto;">
+				<div class="row row-cols-1 row-cols-md-3 g-2">
+
+					<div class="col1" th:each="entry: ${sps}" th:object="${entry}">
+						<a th:href="@{|/lephuc/ctlephuc/*{id}|}">
+							<img th:src="@{|/assets/images/*{hinh}|}" class="cover" alt="">
+
+							<div class=" h-100 p-2" id="hover_anh1">
+								<div class="card-body text-center m-auto w-100">
+									<a th:href="@{|/lephuc/ctlephuc/*{id}|}">
+										<img th:src="@{|/assets/images/*{hinh}|}" class="card-img-top1">
+									</a>
+									<h6 class="card-title mt-3"> [[*{ten}]]</h6>
+									<p class="card-text1">Giá:[[*{#numbers.formatDecimal(gia, 0, 'COMMA', 0, 'POINT')}]]
+										Đ</p>
+								</div>
+							</div>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+</body>
+
+</html>

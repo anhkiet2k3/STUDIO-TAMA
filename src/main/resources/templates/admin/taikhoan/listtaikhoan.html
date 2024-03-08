@@ -1,0 +1,149 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{/admin/index :: dynamic(~{::main})}">
+
+<main ng-app="account-app" ng-controller="account-ctrl" class="my-2">
+	<div class="card-header text-center text-danger my-4">
+		<h3 style="font-weight: bold;">DANH SÁCH TÀI KHOẢN</h3>
+	</div>
+	<div class="card">
+		<div class="card-body">
+			<table class="table table-bordered">
+				<thead class="bg-success text-white">
+					<tr class="text-center">
+						<th style="width: 9%;" >Tài Khoản</th>
+						<th style="width: 10%;">Họ Tên</th>
+						<th>Email</th>
+						<th style="width: 12%;">Số Điện Thoại</th>
+						<th>Địa Chỉ</th>
+						<th>Hình Ảnh</th>
+						<th>Tùy chọn</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="item in pager.items">
+						<td>{{item.tentaikhoan}}</td>
+						<td>{{item.ten}}</td>
+						<td>{{item.email}}</td>
+						<td>{{item.sdt}}</td>
+						<td>{{item.diachi}}</td>
+						<td>{{item.hinhanh}}</td>
+						<td>
+							<div class="btn-group btn-group-xs">
+								<a ng-click="edit(item)" href="" data-bs-toggle="modal"
+									data-bs-target="#exampleModal" class="btn btn-warning"> <i
+									class="bi bi-pencil-square"></i>
+								</a>
+								<!-- Modal -->
+								<div class="modal fade" id="exampleModal" tabindex="-1"
+									aria-labelledby="exampleModalLabel" aria-hidden="true">
+									<div class="modal-dialog modal-xl">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h1 class="modal-title fs-5" id="exampleModalLabel">Sửa thông tin tài khoản</h1>
+												<button type="button" class="btn-close"
+													data-bs-dismiss="modal" aria-label="Close"></button>
+											</div>
+											<div class="modal-body">
+												<div class="row">
+													<div class="col-sm-4 text-center ">
+														<label for="image"> <img
+															class="object-fit-cover border rounded"
+															ng-src="{{'/assets/images/'+form.hinhanh}}"
+															style="max-width: 100%;">
+														</label>
+													</div>
+													<div class="col-sm-8">
+														<div class="row">
+															<div class="form-group col-sm-6">
+																<label>Tài Khoản</label> <input
+																	ng-model="form.tentaikhoan" class="form-control" />
+															</div>
+															<div class="form-group col-sm-6">
+																<label>Mật Khẩu</label> <input ng-model="form.matkhau"
+																	class="form-control" type="password" />
+															</div>
+															<div class="form-group col-sm-6">
+																<label>Họ Tên</label> <input ng-model="form.ten"
+																	class="form-control" />
+															</div>
+															<div class="form-group col-sm-6">
+																<label>Email</label> <input ng-model="form.email"
+																	class="form-control" type="email" />
+															</div>
+															<div class="form-group col-sm-6">
+																<label>Địa Chỉ</label> <input ng-model="form.diachi"
+																	class="form-control" />
+															</div>
+															<div class="form-group col-sm-6">
+																<label>Số Điện Thoai</label> <input ng-model="form.sdt"
+																	class="form-control" />
+															</div>
+														</div>
+														<div class="row">
+															<div class="form-group col-sm-6">
+																<label>Photo</label> <input type="file"
+																	class="form-control" id="image"
+																	onchange="angular.element(this).scope().imageChanged(this.files)">
+															</div>
+															<div class="form-group col-sm-6">
+
+																<label>Chức Năng</label>
+																<div class="form-control">
+																	<div class="form-check ps-0">
+																		<label ng-repeat="r in roles"
+																			class="form-check-label me-2" for="inlineFormCheck">
+																			<input ng-model="selectedRole" ng-value="r"
+																			class="form-check-input1" type="checkbox"
+																			id="inlineFormCheck"
+																			ng-checked="selection.indexOf(r)>-1"
+																			ng-click="toggleRole(r)"> {{r.ten}}
+																		</label>
+																	</div>
+																</div>
+															</div>
+														</div>
+
+													</div>
+
+												</div>
+											</div>
+											<div class="modal-footer">
+												<!--<button type="button" class="btn btn-secondary">Thoát</button>-->
+												<button type="button" class="btn btn-primary"
+													ng-click="update()" data-bs-dismiss="modal">Lưu</button>
+											</div>
+										</div>
+									</div>
+								</div>
+
+
+								<a ng-click="delete(item)" href="" class="btn btn-danger"> <i
+									class="bi bi-trash3"></i>
+								</a>
+							</div>
+
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="card-footer text-center mt-3">
+		<button ng-click="pager.first()" class="btn btn-danger"
+			style="width: 42px;">
+			<i class="fa-solid fa-backward-step"></i>
+		</button>
+		<button ng-click="pager.previous()" class="btn btn-primary">
+			<i class="fa-solid fa-backward"></i>
+		</button>
+		<button class="btn btn-success">{{pager.page+1}} of
+			{{pager.count}}</button>
+		<button ng-click="pager.next()" class="btn btn-primary">
+			<i class="fa-solid fa-forward"></i>
+		</button>
+		<button ng-click="pager.last()" class="btn btn-danger"
+			style="width: 42px;">
+			<i class="fa-solid fa-forward-step"></i>
+		</button>
+	</div>
+</main>

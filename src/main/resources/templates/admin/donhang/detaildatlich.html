@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/admin/index :: dynamic(~{::main})}">
+
+<body>
+	<main th:object="${datlich}" class="my-2">
+		<form th:action="@{/admin/datlich/update}" th:object="${datlich}" method="post">
+			<div>
+				<div class="form-floating my-5" style="display: none;">
+					<input th:field="*{id}" type="text" class="form-control">
+				</div>
+				<div class="form-floating mb-3" style="display: none;">
+					<input th:field="*{taikhoan.tentaikhoan}" type="text" class="form-control">
+				</div>
+				<div class="form-floating mb-3" style="display: none;">
+					<input th:field="*{dichvu.id}" type="text" class="form-control">
+				</div>
+				<div class="form-floating mb-3" style="display: none;">
+					<input th:field="*{ngaythue}" type="text" class="form-control">
+				</div>
+				<div class="form-floating mb-3" style="display: none;">
+					<input th:field="*{thoigian}" type="text" class="form-control">
+				</div>
+				<div class="form-floating mb-3" style="display: none;">
+					<input th:field="*{diachi}" type="text" class="form-control">
+				</div>
+				<div class="form-floating mb-3" style="display: none;">
+					<input th:field="*{ghichu}" type="text" class="form-control">
+				</div>
+				<div class="form-floating mb-3" style="display: none;">
+					<input th:field="*{cachnhan}" type="text" class="form-control">
+				</div>
+			</div>
+			<div class="my-3">
+				<div class="card-header text-center text-danger my-4">
+					<h3 style="font-weight: bold;">CHI TIẾT ĐẶT LỊCH</h3>
+				</div>
+				<div class="my-3">
+					<a type="button" class="btn btn-primary" th:href="@{/admin/donhang/datlich}"><i
+							class="bi bi-caret-left"></i> Quay lại đặt lịch</a>
+					<button class="btn btn-success" style="width: 10%;"><i class="bi bi-save2"></i> Lưu</button>
+					<a th:href="@{|/admin/datlich/delete/*{id}|}" class=" btn btn-danger" style="width: 10%;"><i
+							class="bi bi-trash"></i> Xóa</a>
+				</div>
+				<div class="row">
+					<div class="col-10">
+						<table class="table table-hover text-center border border-1 rounded-3">
+							<thead>
+								<tr>
+									<th>Mã</th>
+									<th>Tên Khách Hành</th>
+									<th>Số Điện Thoại</th>
+									<th>Tên Dịch Vụ</th>
+									<th>Giá</th>
+									<th>Ngày thuê</th>
+									<th>Thời gian</th>
+									<th>Địa chỉ</th>
+									<th>Ghi Chú</th>
+									<th>Nơi Làm</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:object="${datlich2}">
+									<th>[[*{id}]]</th>
+									<td>[[*{taikhoan.ten}]]</td>
+									<td>[[*{taikhoan.sdt}]]</td>
+									<td>[[*{dichvu.ten}]]</td>
+									<td>[[*{#numbers.formatDecimal(dichvu.gia, 0, 'COMMA', 0, 'POINT')}]]Đ</td>
+									<td th:text="${#dates.format(datlich2.ngaythue, 'dd/MM/yyyy')}"></td>
+									<td th:text="${#dates.format(datlich2.thoigian, 'HH:mm')}"></td>
+									<td >[[*{diachi}]]</td>
+									<td>[[*{ghichu}]]</td>
+									<td th:text="${datlich2.cachnhan ? 'Tại nhà' : 'Tại Studio'}"></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="col-2 border border-1 rounded-3">
+						<p>Trạng thái:
+							<select th:field="*{trangthai}" class="form-select" aria-label="Default select example">
+								<option th:each="c:${trangthais1}" th:value="${c.key}">[(${c.value})]</option>
+							</select>
+						</p>
+					</div>
+				</div>
+			</div>
+		</form>
+	</main>
+</body>
+
+</html>

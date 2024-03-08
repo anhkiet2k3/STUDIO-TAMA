@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/index :: dynamic(~{::main})}">
+
+<body>
+	<main style="margin-top: 150px; margin-bottom: 50px;" class="container">
+		<div class="my-3">
+			<form th:action="@{/donhang/huy}" th:object="${donhang}" method="post">
+				<div class="text-center text-danger my-3">
+					<div class="row m-auto">
+						<div class="col-6"><a th:href="@{/donhang/list}" class="btn btn-primary"><i class="bi bi-caret-left"></i> Quay lại</a></div>
+						<div class="col-6"><a class="btn btn-danger" th:switch="${donhang.trangthai}" th:case="'1'"
+								th:href="@{'/donhang/huy/'+${donhang.id}}"><i class="bi bi-x-circle-fill"></i> Hủy
+								đơn</a></div>
+					</div>
+				</div>
+				<div>
+					<div style="display: none;">
+						<div class="form-control" id="taikhoan">[[${#request.remoteUser}]]</div>
+					</div>
+					<div class="form-floating my-5" style="display: none;">
+						<input th:field="*{id}" type="text" class="form-control">
+					</div>
+					<div class="form-floating mb-3" style="display: none;">
+						<input th:field="*{taikhoan.tentaikhoan}" type="text" class="form-control">
+					</div>
+
+					<div class="form-floating mb-3" style="display: none;">
+						<input th:field="*{ngaytao}" type="text" class="form-control">
+					</div>
+					<div class="form-floating mb-3" style="display: none;">
+						<input th:field="*{tongtien}" type="text" class="form-control">
+					</div>
+					<div class="form-floating mb-3" style="display: none;">
+						<input th:field="*{diachi}" type="text" class="form-control">
+					</div>
+					<div class="form-floating mb-3" style="display: none;">
+						<input th:field="*{trangthai}" type="text" class="form-control">
+					</div>
+				</div>
+				<div class="m-auto" style="font-size: 18px; width: 60%; line-height: 3;">
+					<div class="border border-1 rounded-3">
+						<h4 class="mt-3" style="font-weight: bold; text-align: center;">TAMA Studio</h4>
+						<p class="mx-5 text-center">Đường Tô ký, phường Tân Chánh Hiệp, Quận 12, Thành phố Hồ Chí Minh, Việt Nam</p>
+						<hr>
+						<h4 style="font-weight: bold; text-align: center;">Phiếu thanh toán</h4>
+						<div class="row mx-5">
+							<div class="col-4">Mã đơn hàng:</div>
+							<div class="col-8" style="text-align: right;"> <b th:text="*{id}"> </b> </div>
+							<div class="col-4">Tên khách hàng:</div>
+							<div class="col-8" style="text-align: right;"> <b th:text="*{taikhoan.ten}"> </b> </div>
+							<div class="col-4">Số điện thoại:</div>
+							<div class="col-8" style="text-align: right;"> <b th:text="*{taikhoan.sdt}"></b></div>
+							<div class="col-4">Email:</div>
+							<div class="col-8" style="text-align: right;"> <b th:text="*{taikhoan.email}"></b></div>
+							<div class="col-4">Ngày đặt:</div>
+							<div class="col-8" style="text-align: right;"> <b th:text="*{ngaytao}"></b> </div>
+							<div class="col-4">Địa chỉ:</div>
+							<div class="col-8" style="text-align: right;" th:if="*{cachnhan}"> <b>Tại Studio</b>
+							</div>
+							<div class="col-8" style="text-align: right;" th:unless="*{cachnhan}"><b
+									th:text="*{diachi}"></b> </div>
+						</div>
+						<div class="mx-5">
+							<table class="table table-hover text-center">
+								<thead>
+									<tr>
+										<th>Tên</th>
+										<th>Giá</th>
+										<th>Số lượng</th>
+										<th>Thành tiền</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="detail: *{chitietdonhangs}" th:object="${detail}">
+										<td>[[*{lephuc.ten}]]</td>
+										<td>[[*{#numbers.formatDecimal(gia, 0, 'COMMA', 0, 'POINT')}]] Đ</td>
+										<td>[[*{soluong}]]</td>
+										<td>[[*{#numbers.formatDecimal(gia*soluong, 0, 'COMMA', 0, 'POINT')}]] Đ
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="row text-center" th:each="order, state: ${donhang}">
+							<p class="col-6 text-center">Hình thức thanh toán: 
+							<b th:if="*{hinhthuc}">COD</b>
+							<b th:unless="*{hinhthuc}">Ví VNPay</b> 
+							<p class="col-6 " th:unless="*{cachnhan}">Phí vận chuyển: 50.000 Đ</p>
+							<p><b>Tổng tiền: [[${#numbers.formatDecimal(order.tongtien, 0, 'COMMA', 0, 'POINT')}]] ĐỒNG</b></p>
+						</div>
+						
+					</div>
+				</div>
+			</form>
+		</div>
+	</main>
+</body>
+
+</html>

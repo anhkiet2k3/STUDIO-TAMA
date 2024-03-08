@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/index :: dynamic(~{::main})}">
+
+<body>
+	<main style="margin-top: 150px; margin-bottom: 50px;" class="container">
+		<div class="my-3">
+			<div class="card-header text-center text-danger my-4">
+				<h3 style="font-weight: bold;">THANH TOÁN</h3>
+			</div>
+			<div class="card-body m-auto" style="font-size: 16px; width: 90%; line-height: 3;">
+				<div class="row row-cols-1 row-cols-md-2 g-2">
+					<div class="col border border-1 rounded-3">
+						<div style="display: none;">
+							<div class="form-control" id="tentaikhoan">[[${#request.remoteUser}]]</div>
+						</div>
+						<h4 style="font-weight: bold; text-align: center; margin-top: 50px;">TAMA Studio</h4>
+						<p class="mx-5 text-center">Đường Tô ký, phường Tân Chánh Hiệp, Quận 12, Thành phố Hồ Chí Minh,
+							Việt Nam</p>
+
+						<hr>
+						<h4 style="font-weight: bold; text-align: center;">Phiếu thanh toán</h4>
+						<div th:object="${user}" class="row mx-5">
+							<div class="col-6">Tên khách hàng:</div>
+							<div class="col-6" style="text-align: right;"> <b th:text="*{ten}"> </b> </div>
+							<div class="col-6">Số điện thoại:</div>
+							<div class="col-6" style="text-align: right;"> <b th:text="*{sdt}"></b></div>
+							<div class="col-6">Email:</div>
+							<div class="col-6" style="text-align: right;"> <b th:text="*{email}"></b></div>
+						</div>
+						<div class="row mx-5">
+							<div class="col-6">Ngày đặt:</div>
+							<div class="col-6" style="text-align: right;"> <b>{{order.ngaytao|date:'dd-MM-yyyy'}}</b>
+							</div>
+							<div class="col-12">
+							</div>
+						</div>
+						<div class="mx-5">
+							<table class="table text-center">
+								<thead>
+									<tr>
+										<th>Tên</th>
+										<th>Giá</th>
+										<th>Số lượng</th>
+										<th>Thành tiền</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="item in  cart.items">
+										<td>{{item.lephuc.ten}}</td>
+										<td>{{item.lephuc.gia|number}} Đ</td>
+										<td>{{item.soluong}}</td>
+										<td>{{item.soluong*item.lephuc.gia|number}} Đ</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="text-center mb-3">
+							<div class="" ng-if="order.cachnhan === 'false'">
+								<label>Phí vận chuyển: 50.000 Đ</label>
+							</div>
+							<b>Tổng tiền: {{cart.amount + (order.cachnhan == 'false'?50000:0)|number}} ĐỒNG</b>
+						</div>
+					</div>
+					<div class="col">
+						<div class=" mx-5 card pb-3">
+							<div class="text-center card-header">
+								<b>Tổng tiền: {{cart.amount + (order.cachnhan == 'false'?50000:0)|number}} ĐỒNG</b>
+							</div>
+
+							<form name="kiemloi">
+								<div class="row mx-5">
+									<div class="col-6"><label ng-init="order.cachnhan = 'true'">Cách nhận</label></div>
+									<div class="col-6 mt-2">
+										<select class="form-select" id="luucachnhan" ng-model="order.cachnhan" >
+											<option selected value="true">Tại studio</option>
+											<option value="false">Nơi khác</option>
+										</select>
+									</div>
+									<div class="" ng-if="order.cachnhan === 'false'">
+										<label>Phí vận chuyển: 50.000 Đ</label><br>
+										<label>Nhập địa chỉ: <i class="" ng-hide="kiemloi.txtdc.$valid"
+												style="color: red; font-weight: bold; "> Vui lòng nhập địa chỉ </i>
+										</label>
+										<div class="">
+											<textarea id="luudiachi" type="text" class="form-control" name="txtdc"
+												ng-model="order.diachi" required rows="3" cols="100%"></textarea>
+										</div>
+									</div>
+								</div>
+							</form>
+							<div class=" row text-center mx-5 mt-3">
+								<h5 ng-init="order.hinhthuc = 'true'">Hình thức thanh toán</h5>
+								<div class="">
+									<div class="mt-2">
+										<select class="form-select" ng-model="order.hinhthuc">
+											<option selected value="true">Thanh toán khi nhận hàng</option>
+											<option value="false">Thanh toán qua ví VNPay</option>
+										</select>
+									</div>
+								</div>
+								<div class="" style="text-align: right;" ng-if="order.hinhthuc === 'true'">
+									<label style="display: none;" ng-init="order.trangthai = '1'">Trạng thái</label>
+									<button ng-show="kiemloi.$valid" class="btn btn-success w-100 mt-3"
+										ng-click="order.purchase()"><i class="bi bi-bag"></i> Đặt hàng</button>
+								</div>
+								<div class="" ng-if="order.hinhthuc === 'false'">
+									<form th:action="@{/submitOrder}" method="post"   ng-show="kiemloi.$valid">
+										<div class="form-group" style="display: none;">
+											<div class="" ng-if="order.cachnhan === 'false'">
+												<input type="number" class="form-control" id="amount" name="amount"
+													required value={{cart.amount+50000}}>
+											</div>
+										</div>
+										<div class="form-group" style="display: none;">
+											<div class="" ng-if="order.cachnhan === 'true'">
+												<input type="number" class="form-control" id="amount" name="amount"
+													required value={{cart.amount}}>
+											</div>
+										</div>
+										<div class="form-group" style="display: none;">
+											<label for="orderInfo">Thông tin đơn hàng:</label>
+											<input type="text" class="form-control" id="orderInfo" name="orderInfo"
+												required value="Thanh toan don hang">
+										</div>
+										<label style="display: none;" ng-init="order.trangthai = '2'">Trạng thái</label>
+										<button class="btn btn-primary w-100 mt-3"  ng-click="order.ghi()"><i
+												class="bi bi-credit-card"></i>Thanh
+											toán</button>
+									</form>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+	</main>
+</body>
+
+</html>

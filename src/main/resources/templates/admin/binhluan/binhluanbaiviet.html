@@ -1,0 +1,32 @@
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/admin/index :: dynamic(~{::main})}">
+
+<main class="my-2">
+	<div class="card-header text-center text-danger my-4">
+		<h3 style="font-weight: bold;">BÌNH LUẬN BÀI VIẾT</h3>
+	</div>
+	<div>
+		<br>
+		<hr>
+		<table class="table">
+			<thead>
+				<tr>
+				<th >ID</th>
+				<th >Nội dung</th>
+				<th style="width: 15%;" >Khách Hàng</th>
+				<th >Sản Phẩm</th>
+				<th >Tùy chọn</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="entry: ${b}" th:object="${entry}">
+					<th scope="row">[[*{id}]]</th>
+					<td>[[*{noidung}]]</td>
+					<td>[[*{taikhoan.ten}]]</td>
+					<td>[[*{baiviet.tieude}]]</td>
+					<td><a class="btn btn-danger" th:href="@{|/binhluanbv/delete/*{id}|}">Delete</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</main>
+</body>

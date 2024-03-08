@@ -1,0 +1,40 @@
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/admin/index :: dynamic(~{::main})}">
+
+<body>
+	<main ng-app="summary-app" ng-controller="summary-ctrl" class="my-2">
+		<div class="card-header text-center text-danger my-4">
+			<h3 style="font-weight: bold;">TOP NGƯỜI MUA NHIỀU NHẤT</h3>
+		</div>
+		<!-- Fourth Row content -->
+		<div class="fifthRowContent row  mt-3">
+			<div class="col mt-2">
+				<div class="card border-0 mb-2">
+					<div class="card-body">
+						<table class="table table-bordered" id="tableTopCustomer">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>Họ Tên Khách Hàng</th>
+									<th>Email</th>
+									<th>Số Điện thoại</th>
+									<th>Tổng Cộng (VNĐ)</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="c in fifRowContent">
+									<th>{{$index+1}}</th>
+									<th>{{c[0]}}</th>
+									<th>{{c[1]}}</th>
+									<th>{{c[2]}}</th>
+									<th>{{c[3]|number}}</th>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+</body>
+
+</html>

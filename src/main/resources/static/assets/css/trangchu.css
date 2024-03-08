@@ -1,0 +1,188 @@
+/*start trang cá nhân*/
+.card-profile {
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	max-width: 400px;
+	margin: auto;
+	text-align: center;
+	font-family: arial;
+}
+
+.btn_profile {
+	border: none;
+	outline: 0;
+	display: inline-block;
+	padding: 8px;
+	color: white;
+	background-color: #000;
+	text-align: center;
+	cursor: pointer;
+	width: 100%;
+	font-size: 18px;
+}
+
+/*end trang cá nhân*/
+
+/*start menu hover*/
+#menu_hover:after,
+#menu_hover:before {
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+	border: 1px solid rgba(255, 255, 255, 0);
+	bottom: 0px;
+	content: " ";
+	display: block;
+	margin: 0 auto;
+	position: relative;
+	transition: all 280ms ease-in-out;
+	width: 0;
+}
+
+#menu_hover:hover:after,
+#menu_hover:hover:before {
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+	border-color: rgb(194, 0, 0);
+	;
+	transition: width 350ms ease-in-out;
+	width: 80%;
+}
+
+#menu_hover:hover:before {
+	bottom: auto;
+	top: 0;
+	width: 80%;
+}
+
+header.sticky {
+	box-shadow: 0.2rem 0.2rem 0.2rem rgb(192, 192, 192);
+	background-color: aliceblue;
+	max-height: 60px;
+	padding-bottom: 30px;
+	transition: all 0.5s ease;
+	-webkit-transition: all 0.5s ease;
+
+}
+
+.sticky div div ul a img {
+	padding-top: 20px;
+	max-height: 80px;
+	transition: all 0.5s ease;
+	-webkit-transition: all 0.5s ease;
+}
+
+.sticky div div nav ul h6 {
+	font-size: 0px;
+}
+
+#menu_hover {
+	transition: all 0.5s ease;
+	-webkit-transition: all 0.5s ease;
+}
+
+#menu_hover:hover {
+	transform: scale(1.1, 1.1);
+	-webkit-transform: scale(1.1, 1.1);
+}
+/*end menu hover*/
+
+/*start hover trang chủ*/
+
+#hover_anh {
+	transition: all 0.5s ease;
+	-webkit-transition: all 0.5s ease;
+}
+
+#hover_anh:hover {
+	box-shadow: 0 0 5px aliceblue, 0 0 7px rgb(192, 192, 192);
+	transform: translateY(-2px);
+	border: 1px;
+	border-radius: 10px;
+}
+
+.crop img {
+	margin-top: 50px;
+	width: 100%;
+	height: 450px;
+	object-fit: cover;
+	border-radius: 5px;
+}
+
+.crop2 img {
+	width: 100%;
+	height: 550px;
+	object-fit: cover;
+	border-radius: 5px;
+}
+
+.crop3 img {
+	width: 100%;
+	height: 300px;
+	object-fit: cover;
+	border-radius: 5px;
+	margin-bottom: 40px;
+	margin-top: 40px;
+}
+
+.crop4 img {
+	width: 100%;
+	height: 500px;
+	object-fit: cover;
+	border-radius: 5px;
+	margin-bottom: 40px;
+	margin-top: 40px;
+}
+/*end hover trang chủ*/
+
+.waviy {
+	position: relative;
+	-webkit-box-reflect: below -20px linear-gradient(transparent, rgba(0, 0, 0, .2));
+	font-size: 60px;
+}
+
+.waviy span {
+	position: relative;
+	display: inline-block;
+	color: white;
+	text-transform: uppercase;
+	animation: waviy 1s infinite;
+	animation-delay: calc(.1s * var(--i));
+}
+
+@keyframes waviy {
+
+	0%,
+	40%,
+	100% {
+		transform: translateY(0)
+	}
+
+	20% {
+		transform: translateY(-20px)
+	}
+}
+
+/*start cuộn*/
+
+@media (max-width: 900px) {
+	section h1 {
+		font-size: 2rem;
+		text-align: center;
+	}
+
+	section .text-container {
+		flex-direction: column;
+	}
+}
+
+.reveal {
+	position: relative;
+	transform: translateY(150px);
+	opacity: 0;
+	transition: 1s all ease;
+}
+
+.reveal.active {
+	transform: translateY(0);
+	opacity: 1;
+}
+/*end cuộn*/

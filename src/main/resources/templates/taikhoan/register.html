@@ -1,0 +1,92 @@
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/index :: dynamic(~{::main})}">
+<main style="margin-top: 150px; margin-bottom: 50px;" class="container">
+	<div class="card-header text-center text-danger my-4">
+		<h3 style="font-weight: bold;">ĐĂNG KÝ</h3>
+	</div>
+	<div class="">
+		<div class="row">
+			<div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+				<div class="card border-0 shadow rounded-3">
+					<div class="card-body p-4 p-sm-5">
+						<h3 class="text-center mt-3" style="color: red;" th:text="${mess}"></h3> <br>
+						<!--<th:block th:if="${session.msg}">
+							<p class="text-center fs-4 text-sucess">[[${session.message}]] </p>
+							<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+						</th:block>
+-->
+						<form th:action="@{/register/create}" th:object="${items}"   method="post">
+							<div class="form-floating mb-3">
+								<input type="text" name="ten" class="form-control" id="ten" placeholder="Họ và tên" />
+								<label for="ten">Họ và tên</label>
+								<i style="color: red;" th:errors="*{ten}"></i>
+							</div>
+							<div class="form-floating mb-3">
+								<input type="text" class="form-control" name="email" id="email" placeholder="Email" />
+								<label for="email">Email</label>
+								<i style="color: red;" th:errors="*{email}"></i>
+							</div>
+							<div class="form-floating mb-3">
+								<input type="text" class="form-control" id="sdt" name="sdt" placeholder="Email" />
+								<label for="sdt">Số điện thoại</label>
+								<i style="color: red;" th:errors="*{sdt}"></i>
+							</div>
+							<div class="form-floating mb-3">
+								<input type="text" class="form-control" id="diachi" name="diachi"
+									placeholder="Giới tính" />
+								<label for="diachi">Địa chỉ</label>
+								<i style="color: red;" th:errors="*{diachi}"></i>
+							</div>
+
+							<div class="form-floating mb-3">
+								<input type="text" class="form-control" id="tentaikhoan" name="tentaikhoan"
+									placeholder="Tài khoản" />
+								<label for="taikhoan">Tài khoản</label>
+								<i style="color: red;" th:errors="*{tentaikhoan}"></i>
+							</div>
+
+							<div class="form-floating mb-3">
+								<input type="password" class="form-control" id="matkhau" name="matkhau"
+									placeholder="Password" />
+								<label for="matkhau">Mật khẩu</label>
+								<i style="color: red;" th:errors="*{matkhau}"></i>
+							</div>
+							<hr class="my-4">
+							<div class="d-grid">
+								<button class="btn btn-primary btn-login text-uppercase fw-bold" type="submit"
+									data-bs-toggle="modal" data-bs-target="#exampleModal">Đăng ký</button>
+							</div>
+							<div class="text-center "><a class="" href="/user/login" style="font-size: 15px;"> Quay lại
+									đăng nhập</a></div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</main>
+
+</html>
+<style>
+	*[id$=errors] {
+		color: red;
+		font-style: italic;
+	}
+
+	.btn-login {
+		font-size: 0.9rem;
+		letter-spacing: 0.05rem;
+		padding: 0.75rem 1rem;
+	}
+
+	.btn-google {
+		color: white !important;
+		background-color: #ea4335;
+	}
+
+	.btn-facebook {
+		color: white !important;
+		background-color: #3b5998;
+	}
+</style>

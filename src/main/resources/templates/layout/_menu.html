@@ -1,0 +1,100 @@
+<header class="navbar navbar-expand-lg  sticky-top" xmlns:th="https://www.thymeleaf.org/"
+	style="position:fixed;top:0px;left:0;right:0;">
+	<div class="container-fluid">
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse m-auto" style="height: 120px; font-weight: bold;"
+			id="navbarSupportedContent">
+			<nav class=" me-auto mb-4 m-auto col-5" style="font-size: 18px;">
+				<ul class="diachi navbar-nav mx-2">
+					<h6><i class="bi bi-geo-alt-fill"></i>: Tô ký, phường Tân Chánh Hiệp,
+						Quận 12, Thành phố Hồ Chí Minh</h6>
+				</ul>
+				<ul class="navbar-nav text-center">
+					<li class="nav-item w-25 ">
+						<a id="menu_hover" class="nav-link active" aria-current="page" th:href="@{/}" style="color: rgb(194, 0, 0);"><i
+								class="bi bi-house"></i> TRANG CHỦ &nbsp;</a>
+					</li>
+					<li class="nav-item w-25">
+						<a id="menu_hover" class="nav-link active" aria-current="page" th:href="@{/lephuc/list?cid=0}"
+							style="color: rgb(194, 0, 0);"><i class="bi bi-person"></i> LỄ PHỤC &nbsp;</a>
+					</li>
+					<li class="nav-item w-25">
+						<a id="menu_hover" class="nav-link active" aria-current="page" th:href="@{/dichvu/list}"
+							style="color: rgb(194, 0, 0);"><i class="bi bi-table"></i> DỊCH VỤ &nbsp;</a>
+					</li>
+					<li class="nav-item w-25">
+						<a id="menu_hover" class="nav-link active" aria-current="page" th:href="@{/baiviet/list}"
+							style="color: rgb(194, 0, 0);"><i class="bi bi-file-earmark"></i> BÀI VIẾT &nbsp;</a>
+					</li>
+				</ul>
+			</nav>
+			<ul class="navbar-nav me-auto m-auto">
+				<a th:href="@{/}"><img id="logo" th:src="@{|/assets/images/logo_tama.png|}" style="height: 120px"
+						alt></a>
+			</ul>
+			<nav class=" me-auto mb-4 m-auto col-5" style="font-size: 18px;">
+				<ul class="navbar-nav">
+					<h6><i class="bi bi-telephone-fill"></i>: 0987654321</h6>&nbsp;&nbsp;
+					<h6><i class="bi bi-person"></i>: TAMA</h6>&nbsp;&nbsp;
+					<h6><i class="bi bi-instagram"></i>: tama.ta.ma</h6>&nbsp;&nbsp;
+					<h6><i class="bi bi-envelope-at-fill"></i>: tama2023@gmail.com</h6>
+				</ul>
+				<ul class="navbar-nav text-center">
+					<li class="nav-item w-25">
+						<a id="menu_hover" class="nav-link active" aria-current="page" th:href="@{/donhang/list}"
+							style="color: rgb(194, 0, 0);"><i class="bi bi-card-text"></i> ĐƠN HÀNG &nbsp;</a>
+					</li>
+					<li class="nav-item w-25">
+						<a id="menu_hover" class="nav-link active" aria-current="page" th:href="@{/giohang/view}"
+							style="color: rgb(194, 0, 0);"><i class="bi bi-cart2"></i> GIỎ HÀNG <b>{{cart.items.length}}</b>
+						</a>
+					</li>
+					<li class="nav-item w-25">
+						<a id="menu_hover" class="nav-link active" aria-current="page" th:href="@{/lienhe}"
+							style="color: rgb(194, 0, 0);"><i class="bi bi-headset"></i> LIÊN HỆ &nbsp;</a>
+					</li>
+					<li class="nav-item w-25 dropdown">
+						<th:block th:unless="${#request.remoteUser}">
+					   <a id="menu_hover" class="nav-link dropdown-toggle" href="#" role="button" style="color: rgb(194, 0, 0);"
+							data-bs-toggle="dropdown" aria-expanded="false">
+							<i class="bi bi-person-circle"></i></i> TÀI KHOẢN </a>
+					</th:block>
+					<th:block th:if="${#request.remoteUser}">
+					      <a class="nav-link dropdown-toggle" id="menu_hover" href="#" role="button" style="color: rgb(194, 0, 0);"
+							data-bs-toggle="dropdown" aria-expanded="false">
+							<i class="bi bi-person-circle"></i> [[${#request.remoteUser}]] </a>
+							<input type="text" id="auth" th:value="${#request.remoteUser}" style="display: none;">
+					</th:block>
+						<ul class="dropdown-menu">
+							<th:block th:unless="${#request.remoteUser}">
+								<li><a class="dropdown-item" th:href="@{/taikhoan/login/from}"> Đăng nhập</a></li>
+							</th:block>
+							<th:block th:unless="${#request.remoteUser}">
+								<li><a class="dropdown-item" th:href="@{/taikhoan/register}"> Đăng Ký</a></li>
+							</th:block>
+							<th:block th:if="${#request.remoteUser}">
+								<li><a class="dropdown-item" th:href="@{/taikhoan/logoff}"> Đăng xuất</a></li>
+			                    <li><a class="dropdown-item" th:href="@{/taikhoan/trangcanhan}">Trang Cá Nhân</a></li>
+								<li><a class="dropdown-item" th:href="@{/taikhoan/doimatkhau}"> Đổi mật khẩu</a></li>
+							</th:block>
+						</ul>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</header>
+<script>
+	$(document).ready(function () {
+		$(window).scroll(function () {
+			if ($(this).scrollTop()) {
+				$('header').addClass('sticky');
+			} else {
+				$('header').removeClass('sticky');
+			}
+		})
+	});
+</script>

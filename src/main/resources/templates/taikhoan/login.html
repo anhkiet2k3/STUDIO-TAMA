@@ -1,0 +1,74 @@
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/index :: dynamic(~{::main})}">
+<main style="margin-top: 150px; margin-bottom: 50px; " class="container">
+	<div class="card-header text-center text-danger my-4">
+		<h3 style="font-weight: bold;">ĐĂNG NHẬP</h3>
+	</div>
+	<div class="">
+		<div class="row">
+			<div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+				<div class="card border-0 shadow rounded-3">
+					<div class="card-body p-4 p-sm-5">
+						<div th:if="${session.message}" class="container">
+							<div class="alert alert-success my-2 text-center" role="alert">
+								<span th:text="${session.message}"></span>
+							</div>
+							<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+						</div>
+						<form action="/taikhoan/login" method="post">
+							<div class="form-floating mb-3">
+								<input name="tentaikhoan" type="text" class="form-control" id="floatingInput"
+									placeholder="Tài khoản">
+								<label for="floatingInput">Tài khoản</label>
+							</div>
+							<div class="form-floating mb-3">
+								<input name="matkhau" type="password" class="form-control" id="floatingPassword"
+									placeholder="Password">
+								<label for="floatingPassword">Mật khẩu</label>
+							</div>
+
+							<!--<div class="form-check mb-3">
+								<input class="form-check-input" name="remember-me" type="checkbox" value=""
+									id="rememberPasswordCheck">
+								<label class="form-check-label" for="rememberPasswordCheck">
+									Remember password
+								</label>
+							</div>-->
+							<hr class="my-4">
+							<div class="d-grid">
+								<button class="btn btn-primary btn-login text-uppercase fw-bold" type="submit">Đăng
+									nhập</button>
+							</div>
+							<h5 class="text-center mt-3" style="color: red;" th:text="${message}"></h5>
+						</form>
+						<th:block th:unless="${#request.remoteUser}">
+							<div class="text-center mt-3"><a class="" href="/taikhoan/register"
+									style="font-size: 15px;"> Đăng ký tài khoản</a>||<a class=""
+									href="/taikhoan/quenmatkhau" style="font-size: 15px;"> Quên Mật Khẩu?</a></div>
+						</th:block>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</main>
+
+</html>
+<style>
+	.btn-login {
+		font-size: 0.9rem;
+		letter-spacing: 0.05rem;
+		padding: 0.75rem 1rem;
+	}
+
+	.btn-google {
+		color: white !important;
+		background-color: #ea4335;
+	}
+
+	.btn-facebook {
+		color: white !important;
+		background-color: #3b5998;
+	}
+</style>

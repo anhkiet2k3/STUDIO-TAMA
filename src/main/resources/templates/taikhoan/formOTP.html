@@ -1,0 +1,58 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{/layout/index :: dynamic(~{::main})}">
+<main style="margin-top: 150px; margin-bottom: 50px; " class="container">
+      <style>
+		
+		.btn-login {
+		  font-size: 0.9rem;
+		  letter-spacing: 0.05rem;
+		  padding: 0.75rem 1rem;
+		}
+		
+		.btn-google {
+		  color: white !important;
+		  background-color: #ea4335;
+		}
+		
+		.btn-facebook {
+		  color: white !important;
+		  background-color: #3b5998;
+		}
+    </style>
+  
+		<div class="container mt-5">
+		  <div class="row">
+			<div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+			  <div class="card border-0 shadow rounded-3 my-5">
+				<div class="card-body p-4 p-sm-5">
+				  <h4 class="card-title text-center mb-5 fw-light fs-5">ĐIỀN MÃ OTP</h4>
+				 <div th:if="${session.message}" class="container">
+				     <div class="alert alert-danger my-2 text-center" role="alert">
+				       <span th:text="${session.message}"></span>
+                       				     
+				     </div>
+				     <th:block th:text="${#session.removeAttribute('message')}"></th:block>
+				  </div>
+				  <form action="" th:action="@{/OTP}" method="post" >
+					<div class="form-floating mb-3">
+					  <input name="otp"  type="text" required="required" class="form-control">
+					  <label for="floatingPassword">Nhập mã OTP tại đây!</label>
+					</div>
+					<hr class="my-4">
+					<div class="d-grid">
+					  <button class="btn btn-primary btn-login text-uppercase fw-bold" >Gửi</button>
+					</div>	
+				<h5 class="text-center mt-3" style="color: red;" th:text="${message}"></h5>			
+					
+            </form>
+            <div class="text-center mt-3" ><a class="" href="/trangchu/home" style="font-size: 15px;"> Quay về trang chủ</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+    
+</main>
+
+</html>

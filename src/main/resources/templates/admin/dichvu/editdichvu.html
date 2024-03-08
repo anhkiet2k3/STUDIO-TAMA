@@ -1,0 +1,65 @@
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/admin/index :: dynamic(~{::main})}">
+
+<main class="my-2">
+	<div class="card-header text-center text-danger my-4">
+		<h3 style="font-weight: bold;">THÊM VÀ CHỈNH SỬA DỊCH VỤ</h3>
+	</div>
+	<div class="ms-auto">
+		<a th:href="@{/admin/dichvu/list}" type="button" class="btn btn-outline-primary ">Quay
+			Lại Danh Sách Dịch Vụ</a>
+	</div>
+	<div class="card mb-3  mt-3">
+		<form class="row g-3 needs-validation p-3" th:action="@{/admin/dichvu/edit}" th:object="${dichVu}" method="post"
+			enctype="multipart/form-data">
+			<div class="col-12 position-relative">
+				<input type="hidden" th:field="*{id}" class="form-control" id="validationTooltip01" required>
+			</div>
+			<div class="col-12 position-relative">
+				<label for="validationTooltip01" class="form-label">Tên Dịch Vụ</label>
+				<input th:field="*{ten}" type="text" class="form-control" id="validationTooltip01" required>
+			</div>
+			<div class="col-12 position-relative">
+				<label for="validationTooltip01" class="form-label">Giá Dịch Vụ</label>
+				<input th:field="*{gia}" type="text" class="form-control" id="validationTooltip01" required>
+
+			</div>
+			<div class="col-12">
+				<label for="validationTextarea" class="form-label">Nội Dung Dịch Vụ</label>
+				<textarea th:field="*{noidung}" rows="4" class="form-control" id="validationTextarea" placeholder=""
+					required></textarea>
+				<div class="invalid-feedback">
+					<i style="color: red;" th:errors="*{gia}"></i>
+				</div>
+			</div>
+			<div class="col-12">
+				<label for="validationTextarea" class="form-label">Mô tả Dịch Vụ</label>
+				<textarea th:field="*{mota}" rows="4" class="form-control" id="validationTextarea" placeholder=""
+					required></textarea>
+				<div class="invalid-feedback">
+					<i style="color: red;" th:errors="*{gia}"></i>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<label  class="form-label">Hình Ảnh Chính</label>
+				<input name="hinhanh1File" type="file"  class="form-control" >
+		
+			</div>
+			<div class="col-md-6">
+				<label  class="form-label">Hình Ảnh Phụ</label>
+				<input name="hinhanh2File" type="file" class="form-control">
+			
+			</div>
+			<div class="col-12">
+				<label for="basic-url" class="form-label">Link YouTuBe</label>
+				<div class="input-group">
+					<span class="input-group-text" id="basic-addon3">https://www.youtube.com/embed/</span>
+					<input th:field="*{href}" type="text" class="form-control" id="basic-url"
+						aria-describedby="basic-addon3 basic-addon4">
+				</div>
+			</div>
+			<div class="col-12">
+				<button type="submit" class="btn btn-success">Lưu</button>
+			</div>
+		</form>
+	</div>
+</main>

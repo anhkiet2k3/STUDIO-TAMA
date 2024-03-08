@@ -1,0 +1,106 @@
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/admin/index :: dynamic(~{::main})}">
+
+<main class="my-2">
+	<div class="card-header text-center text-danger my-4">
+		<h3 style="font-weight: bold;">ĐẶT LỊCH</h3>
+	</div>
+	<div class="">
+		<div class="row">
+			<div class="col-7 ">
+				<h5 style="color: blue; font-weight: bold;"> <i class="bi bi-funnel-fill"></i> LỌC THEO TRẠNG THÁI
+				</h5>
+				<div class="mx-3 mt-3">
+					<a th:href="@{/admin/donhang/datlich}"
+						style="text-decoration: none; --bs-link-hover-color-rgb: 255, 0, 0;">Tất cả</a> |
+					<a th:href="@{/admin/donhang/datlich?trangthai=1}"
+						style="text-decoration: none; --bs-link-hover-color-rgb: 255, 0, 0;  ">Chờ xác nhận</a> |
+					<a th:href="@{/admin/donhang/datlich?trangthai=2}"
+						style="text-decoration: none; --bs-link-hover-color-rgb: 255, 0, 0;">Đã Xác Nhận</a> |
+					<a th:href="@{/admin/donhang/datlich?trangthai=3}"
+						style="text-decoration: none; --bs-link-hover-color-rgb: 255, 0, 0;">Đã Hủy</a> |
+					<a th:href="@{/admin/donhang/datlich?trangthai=4}"
+						style="text-decoration: none; --bs-link-hover-color-rgb: 255, 0, 0;">Đã Hoàn Thành</a> |
+				</div>
+			</div>
+			<div class="col-5">
+				<h5 style="color: blue; font-weight: bold;"> <i class="bi bi-search"></i> TÌM THEO SỐ ĐIỆN THOẠI và Tên</h5>
+				<form th:action="@{/admin/datlich/timkiem}" method="post" class="row g-3">
+					<div class="col-9">
+						<input name="txtkiem" class="form-control" placeholder="Nhập . . .">
+					</div>
+					<div class="col-3">
+						<button type="submit" class="btn btn-primary" style="width: 100px;"><i class="bi bi-search"></i>
+							Tìm</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<hr>
+	<h3 th:if="${message}" class="text-center border rounded-3" style=" color: red; font-weight: bold; padding: 10px;">
+		<b>[[${message}]]</b>
+	</h3>
+
+
+	<div class="card border border-2">
+		<div class="card-body">
+			<table class="table table-hover text-center">
+				<thead>
+					<tr>
+						<th style="width: 10%;">Tên Khách Hàng</th>
+						<th style="width: 10%;">Số Điện Thoại</th>
+						<th style="width: 15%;">Tên Tên Dịch Vụ</th>
+						<th style="width: 10%;">Giá</th>
+						<th style="width: 10%;">Ngày Thuê</th>
+						<th style="width: 5%;">Thời gian</th>
+						<th style="width: 10%;">Địa Chỉ</th>
+						<th style="width: 5%;">Ghi Chú</th>
+						<th style="width: 10%;">Nơi làm</th>
+						<th style="width: 10%;">Trạng Thái</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="d:${items1}" th:object="${d}">
+						<td>[[*{taikhoan.ten}]]</td>
+						<td>[[*{taikhoan.sdt}]]</td>
+						<td>[[*{dichvu.ten}]]</td>
+						<td>[[*{#numbers.formatDecimal(dichvu.gia, 0, 'COMMA', 0, 'POINT')}]]Đ</td>
+						<td th:text="${#dates.format(d.ngaythue, 'dd/MM/yyyy')}"></td>
+						<td th:text="${#dates.format(d.thoigian, 'HH:mm')}"></td>
+						<td
+							th:text="${#strings.length(d.diachi) &lt;= 10 ? d.diachi : #strings.substring(d.diachi, 0, 10) + '...'}">
+						</td>
+						<td
+							th:text="${#strings.length(d.ghichu) &lt;= 10 ? d.ghichu : #strings.substring(d.ghichu, 0, 10) + '...'}">
+						</td>
+						<td th:text="${d.cachnhan ? 'Tại nhà' : 'Tại Studio'}"></td>
+						<td>
+							<div th:switch="${d.trangthai}" style="color:rgb(255, 0, 0); font-weight: bold ; ">
+								<p th:case="'1'">Chờ xác nhận</p>
+								<p th:case="'2'">Đã xác nhận</p>
+								<p th:case="'3'">Đã hủy</p>
+								<p th:case="'4'">Đã Hoàn Thành</p>
+							</div>
+						<td>
+						<td class="m-auto">
+							<a th:href="@{|/admin/datlich/delete/*{id}|}" class="btn btn-danger">
+								<i class="bi bi-trash"></i>
+							</a>
+							<a th:href="@{|/admin/datlich/detail/*{id}|}" class="btn btn-warning"> <i
+									class="bi bi-pencil-square"></i>
+							</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="">
+		<div class="d-flex">
+			<div class="p-2">
+				<!-- Phân trang -->
+				
+			</div>
+		</div>
+	</div>
+</main>

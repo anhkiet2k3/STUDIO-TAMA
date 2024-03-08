@@ -1,0 +1,151 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+.load {
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	background-color: rgb(255, 255, 255);
+	z-index: 10000000;
+	display: block;
+	overflow: hidden;
+}
+
+.load img {
+	width: 30%;
+	height: 30%;
+	top: 40%;
+	left: 40%;
+	position: absolute;
+}
+
+.btnMore {
+	float: left;
+	width: 100%;
+	text-align: center;
+	line-height: 40px;
+	letter-spacing: 1px;
+	margin-top: 20%;
+}
+
+.ellipsis {
+	position: relative;
+	width: 64px;
+	height: 64px;
+	margin: 0 auto
+}
+
+.ellipsis div {
+	position: absolute;
+	top: 27px;
+	width: 11px;
+	height: 11px;
+	border-radius: 50%;
+	background: rgb(255, 0, 0);
+	-webkit-animation-timing-function: cubic-bezier(0, 1, 1, 0);
+	animation-timing-function: cubic-bezier(0, 1, 1, 0)
+}
+
+.ellipsis div:nth-child(1) {
+	left: 6px;
+	-webkit-animation: lds-ellipsis1 0.6s infinite;
+	animation: lds-ellipsis1 0.6s infinite
+}
+
+.ellipsis div:nth-child(2) {
+	left: 6px;
+	-webkit-animation: lds-ellipsis2 0.6s infinite;
+	animation: lds-ellipsis2 0.6s infinite
+}
+
+.ellipsis div:nth-child(3) {
+	left: 26px;
+	-webkit-animation: lds-ellipsis2 0.6s infinite;
+	animation: lds-ellipsis2 0.6s infinite
+}
+
+.ellipsis div:nth-child(4) {
+	left: 45px;
+	-webkit-animation: lds-ellipsis3 0.6s infinite;
+	animation: lds-ellipsis3 0.6s infinite
+}
+
+@-webkit-keyframes lds-ellipsis1 {
+	0% {
+		-webkit-transform: scale(0);
+		transform: scale(0)
+	}
+
+	100% {
+		-webkit-transform: scale(1);
+		transform: scale(1)
+	}
+}
+
+@keyframes lds-ellipsis1 {
+	0% {
+		-webkit-transform: scale(0);
+		transform: scale(0)
+	}
+
+	100% {
+		-webkit-transform: scale(1);
+		transform: scale(1)
+	}
+}
+
+@-webkit-key lds-ellipsis2 {
+	100% {
+		-webkit-transform: translate(19px, 0);
+		transform: translate(19px, 0)
+	}
+}
+
+@keyframes lds-ellipsis2 {
+	100% {
+		-webkit-transform: translate(19px, 0);
+		transform: translate(19px, 0)
+	}
+}
+
+@-webkit-keyframes lds-ellipsis3 {
+	0% {
+		-webkit-transform: scale(1);
+		transform: scale(1)
+	}
+
+	100% {
+		-webkit-transform: scale(0);
+		transform: scale(0)
+	}
+}
+
+@keyframes lds-ellipsis3 {
+	0% {
+		-webkit-transform: scale(1);
+		transform: scale(1)
+	}
+
+	100% {
+		-webkit-transform: scale(0);
+		transform: scale(0)
+	}
+}
+
+.an {
+	display: block;
+	display: -webkit-box;
+	height: 16px*1.3*3;
+	font-size: 16px;
+	line-height: 1.3;
+	-webkit-line-clamp: 3;
+	/* số dòng hiển thị */
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	margin-top: 10px;
+}
